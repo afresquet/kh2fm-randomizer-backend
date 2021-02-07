@@ -1,5 +1,6 @@
-import { Strategy as DiscordStrategy } from "passport-discord";
-import { User } from "../db/models/User";
+import { Profile, Strategy as DiscordStrategy } from "passport-discord";
+import { Provider } from "../types/Provider";
+import { createVerifyFunction } from "./createVerifyFunction";
 
 export const discordStrategy = new DiscordStrategy(
 	{
@@ -7,27 +8,17 @@ export const discordStrategy = new DiscordStrategy(
 		clientSecret: process.env.DISCORD_CLIENT_SECRET!,
 		callbackURL: "/auth/discord/redirect",
 		scope: ["identify", "email"],
+		passReqToCallback: true,
 	},
-	async (accessToken, refreshToken, profile, done) => {
-		const user = await User.findOne({ "providers.discord.id": profile.id });
-
-		if (user) {
-			done(null, user);
-
-			return;
+	createVerifyFunction<Profile>(
+		Provider.DISCORD,
+		(accessToken, refreshToken, profile) => {
+			return {
+				id: profile.id,
+				username: profile.username,
+				email: profile.email!,
+				accessToken,
+			};
 		}
-
-		const newUser = await User.create({
-			providers: {
-				discord: {
-					id: profile.id,
-					username: profile.username,
-					email: profile.email!,
-					accessToken,
-				},
-			},
-		});
-
-		done(null, newUser);
-	}
+	)
 );

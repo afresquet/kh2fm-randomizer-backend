@@ -1,10 +1,9 @@
 import {
 	Profile,
 	Strategy as PatreonStrategy,
-	VerifyCallback,
 } from "@oauth-everything/passport-patreon";
-import { User, UserSchema } from "../db/models/User";
-import { VerifyFunction } from "../types/VerifyFunction";
+import { Provider } from "../types/Provider";
+import { createVerifyFunction } from "./createVerifyFunction";
 
 export const patreonStrategy = new PatreonStrategy(
 	{
@@ -12,27 +11,17 @@ export const patreonStrategy = new PatreonStrategy(
 		clientSecret: process.env.PATREON_CLIENT_SECRET!,
 		callbackURL: "/auth/patreon/redirect",
 		scope: ["identity", "identity[email]", "identity.memberships"],
+		passReqToCallback: true,
 	},
-	(async (accessToken, refreshToken, profile, done) => {
-		const user = await User.findOne({ "providers.patreon.id": profile.id });
-
-		if (user) {
-			done(null, user);
-
-			return;
+	createVerifyFunction<Profile>(
+		Provider.PATREON,
+		(accessToken, refreshToken, profile) => {
+			return {
+				id: profile.id,
+				username: profile.username!,
+				email: profile.emails![0].value,
+				accessToken,
+			};
 		}
-
-		const newUser = await User.create({
-			providers: {
-				patreon: {
-					id: profile.id,
-					username: profile.username!,
-					email: profile.emails![0].value,
-					accessToken,
-				},
-			},
-		});
-
-		done(null, newUser);
-	}) as VerifyFunction<Profile, VerifyCallback<UserSchema>>
+	)
 );

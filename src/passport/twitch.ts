@@ -1,7 +1,6 @@
-import { VerifyCallback } from "@oauth-everything/passport-patreon";
 import { Strategy as TwitchStrategy } from "passport-twitch-strategy";
-import { User, UserSchema } from "../db/models/User";
-import { VerifyFunction } from "../types/VerifyFunction";
+import { Provider } from "../types/Provider";
+import { createVerifyFunction } from "./createVerifyFunction";
 
 interface Profile {
 	id: string;
@@ -25,26 +24,15 @@ export const twitchStrategy = new TwitchStrategy(
 		callbackURL: "/auth/twitch/redirect",
 		scope: "user_read",
 	},
-	(async (accessToken, refreshToken, profile, done) => {
-		const user = await User.findOne({ "providers.twitch.id": profile.id });
-
-		if (user) {
-			done(null, user);
-
-			return;
+	createVerifyFunction<Profile>(
+		Provider.TWITCH,
+		(accessToken, refreshToken, profile) => {
+			return {
+				id: profile.id,
+				username: profile.displayName,
+				email: profile.email,
+				accessToken,
+			};
 		}
-
-		const newUser = await User.create({
-			providers: {
-				twitch: {
-					id: profile.id,
-					username: profile.displayName,
-					email: profile.email,
-					accessToken,
-				},
-			},
-		});
-
-		done(null, newUser);
-	}) as VerifyFunction<Profile, VerifyCallback<UserSchema>>
+	)
 );
