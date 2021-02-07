@@ -15,11 +15,15 @@ class Provider {
 }
 
 class PatreonProvider extends Provider {}
+class TwitchProvider extends Provider {}
 class DiscordProvider extends Provider {}
 
 class Providers {
 	@prop({ _id: false })
 	patreon?: PatreonProvider;
+
+	@prop({ _id: false })
+	twitch?: TwitchProvider;
 
 	@prop({ _id: false })
 	discord?: DiscordProvider;

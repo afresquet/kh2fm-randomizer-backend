@@ -4,13 +4,7 @@ import {
 	VerifyCallback,
 } from "@oauth-everything/passport-patreon";
 import { User, UserSchema } from "../db/models/User";
-
-type VerifyFunction = (
-	accessToken: string,
-	refreshToken: string,
-	profile: Profile,
-	done: VerifyCallback<UserSchema>
-) => Promise<void>;
+import { VerifyFunction } from "../types/VerifyFunction";
 
 export const patreonStrategy = new PatreonStrategy(
 	{
@@ -40,5 +34,5 @@ export const patreonStrategy = new PatreonStrategy(
 		});
 
 		done(null, newUser);
-	}) as VerifyFunction
+	}) as VerifyFunction<Profile, VerifyCallback<UserSchema>>
 );
