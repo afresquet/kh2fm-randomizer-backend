@@ -4,7 +4,7 @@ import cors from "cors";
 import express from "express";
 import passport from "passport";
 import "./passport/configure";
-import { authRouter } from "./routes/auth";
+import { routes } from "./routes";
 
 const app = express();
 
@@ -27,6 +27,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(authRouter);
+app.use(routes);
 
 export { app };

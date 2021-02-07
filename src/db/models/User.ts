@@ -14,9 +14,13 @@ class Provider {
 	accessToken: string;
 }
 
+class PatreonProvider extends Provider {}
 class DiscordProvider extends Provider {}
 
 class Providers {
+	@prop({ _id: false })
+	patreon?: PatreonProvider;
+
 	@prop({ _id: false })
 	discord?: DiscordProvider;
 }

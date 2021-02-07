@@ -1,6 +1,7 @@
 import passport from "passport";
 import { User } from "../db/models/User";
 import { discordStrategy } from "./discord";
+import { patreonStrategy } from "./patreon";
 
 passport.serializeUser<string>((user, done) => {
 	done(null, user.id);
@@ -19,4 +20,5 @@ passport.deserializeUser<string>(async (id, done) => {
 });
 
 // Strategies
+passport.use(patreonStrategy);
 passport.use(discordStrategy);

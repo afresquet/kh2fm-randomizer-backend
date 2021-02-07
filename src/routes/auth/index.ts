@@ -1,8 +1,9 @@
 import express from "express";
-import { discordAuthRouter } from "./discord";
+import { createAuthRouter } from "./createAuthRouter";
 
 const router = express.Router();
 
-router.use("/auth/discord", discordAuthRouter);
+router.use("/patreon", createAuthRouter("patreon"));
+router.use("/discord", createAuthRouter("discord"));
 
 export { router as authRouter };
