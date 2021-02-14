@@ -8,4 +8,9 @@ router.use("/patreon", createAuthRouter(Provider.PATREON));
 router.use("/twitch", createAuthRouter(Provider.TWITCH));
 router.use("/discord", createAuthRouter(Provider.DISCORD));
 
+router.get("/logout", (req, res) => {
+	req.logout();
+	res.redirect("http://localhost:3000/");
+});
+
 export { router as authRouter };
