@@ -6,6 +6,7 @@
 	"dependencies": {
 		"@oauth-everything/passport-patreon": "^1.0.1",
 		"@typegoose/typegoose": "^7.4.8",
+		"@valaxor/kh2fm-randomizer": "^1.0.0",
 		"apollo-server-express": "^2.21.0",
 		"cookie-parser": "^1.4.5",
 		"cookie-session": "^1.4.0",

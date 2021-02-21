@@ -1,4 +1,5 @@
 import { getModelForClass, prop } from "@typegoose/typegoose";
+import { TimeStamps } from "@typegoose/typegoose/lib/defaultClasses";
 import { Field, ID, InterfaceType, ObjectType } from "type-graphql";
 
 @InterfaceType()
@@ -43,7 +44,7 @@ class Providers {
 }
 
 @ObjectType()
-class User {
+class User extends TimeStamps {
 	@Field(() => ID)
 	id: string;
 
@@ -52,7 +53,7 @@ class User {
 	providers: Providers;
 }
 
-const Model = getModelForClass(User);
+const Model = getModelForClass(User, { schemaOptions: { timestamps: true } });
 
 export { Model as User };
 export { User as UserSchema };
