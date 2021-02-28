@@ -19,8 +19,8 @@ interface Profile {
 
 export const twitchStrategy = new TwitchStrategy(
 	{
-		clientID: process.env.TWITCH_CLIENT_ID!,
-		clientSecret: process.env.TWITCH_CLIENT_SECRET!,
+		clientID: process.env.TWITCH_CLIENT_ID,
+		clientSecret: process.env.TWITCH_CLIENT_SECRET,
 		callbackURL: "/auth/twitch/redirect",
 		scope: "user_read",
 	},

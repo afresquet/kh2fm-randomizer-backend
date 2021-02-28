@@ -4,8 +4,8 @@ import { createVerifyFunction } from "./createVerifyFunction";
 
 export const discordStrategy = new DiscordStrategy(
 	{
-		clientID: process.env.DISCORD_CLIENT_ID!,
-		clientSecret: process.env.DISCORD_CLIENT_SECRET!,
+		clientID: process.env.DISCORD_CLIENT_ID,
+		clientSecret: process.env.DISCORD_CLIENT_SECRET,
 		callbackURL: "/auth/discord/redirect",
 		scope: ["identify", "email"],
 		passReqToCallback: true,

@@ -7,8 +7,8 @@ import { createVerifyFunction } from "./createVerifyFunction";
 
 export const patreonStrategy = new PatreonStrategy(
 	{
-		clientID: process.env.PATREON_CLIENT_ID!,
-		clientSecret: process.env.PATREON_CLIENT_SECRET!,
+		clientID: process.env.PATREON_CLIENT_ID,
+		clientSecret: process.env.PATREON_CLIENT_SECRET,
 		callbackURL: "/auth/patreon/redirect",
 		scope: ["identity", "identity[email]", "identity.memberships"],
 		passReqToCallback: true,

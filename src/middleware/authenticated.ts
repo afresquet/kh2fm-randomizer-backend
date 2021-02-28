@@ -27,7 +27,7 @@ export const apiKeyAuthenticated: RequestHandler = async (req, res, next) => {
 			throw new Error("invalid token");
 		}
 
-		const payload = verify(token!, process.env.JWT_SECRET!) as { user: string };
+		const payload = verify(token, process.env.JWT_SECRET) as { user: string };
 
 		const user = await UserService.find(payload.user);
 
