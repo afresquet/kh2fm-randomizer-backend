@@ -9,7 +9,7 @@ passport.serializeUser<string>((user, done) => {
 });
 
 passport.deserializeUser<string>(async (id, done) => {
-	const user = await User.findById(id);
+	const user = await User.findById(id).populate("seed");
 
 	if (!user) {
 		done(new Error("User doesn't exist"));

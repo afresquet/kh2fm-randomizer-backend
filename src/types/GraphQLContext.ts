@@ -1,4 +1,6 @@
+import { Request, Response } from "express";
+
 export interface GraphQLContext {
-	req: Express.Request;
-	res: Express.Response;
+	req: Request;
+	res: Response;
 }

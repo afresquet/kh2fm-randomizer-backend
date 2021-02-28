@@ -1,6 +1,7 @@
 import { getModelForClass, prop } from "@typegoose/typegoose";
 import { TimeStamps } from "@typegoose/typegoose/lib/defaultClasses";
 import { Field, ID, InterfaceType, ObjectType } from "type-graphql";
+import { SeedSchema } from "../Seed";
 
 @InterfaceType()
 class Provider {
@@ -8,15 +9,15 @@ class Provider {
 	@prop({ required: true })
 	id: string;
 
-	@Field(() => String)
+	@Field()
 	@prop({ required: true })
 	username: string;
 
-	@Field(() => String)
+	@Field()
 	@prop({ required: true })
 	email: string;
 
-	@Field(() => String)
+	@Field()
 	@prop({ required: true })
 	accessToken: string;
 }
@@ -51,6 +52,10 @@ class User extends TimeStamps {
 	@Field(() => Providers)
 	@prop({ _id: false })
 	providers: Providers;
+
+	@Field(() => SeedSchema, { nullable: true })
+	@prop({ ref: "Seed", default: null })
+	seed?: SeedSchema;
 }
 
 const Model = getModelForClass(User, { schemaOptions: { timestamps: true } });
