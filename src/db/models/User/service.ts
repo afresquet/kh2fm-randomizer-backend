@@ -1,9 +1,9 @@
 import { User } from "./model";
 
 const find = (id: string) => {
-	return User.findById(id);
+	return User.findById(id).populate("seed");
 };
 
-export class UserService {
-	static find = find;
-}
+export const UserService = {
+	find,
+};

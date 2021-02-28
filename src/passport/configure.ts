@@ -1,5 +1,5 @@
 import passport from "passport";
-import { User } from "../db/models/User";
+import { UserService } from "../db/models/User";
 import { discordStrategy } from "./discord";
 import { patreonStrategy } from "./patreon";
 import { twitchStrategy } from "./twitch";
@@ -9,7 +9,7 @@ passport.serializeUser<string>((user, done) => {
 });
 
 passport.deserializeUser<string>(async (id, done) => {
-	const user = await User.findById(id).populate("seed");
+	const user = await UserService.find(id);
 
 	if (!user) {
 		done(new Error("User doesn't exist"));
