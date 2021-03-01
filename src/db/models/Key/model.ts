@@ -1,9 +1,10 @@
-import { getModelForClass, prop } from "@typegoose/typegoose";
+import { getModelForClass, prop, Ref } from "@typegoose/typegoose";
 import { TimeStamps } from "@typegoose/typegoose/lib/defaultClasses";
+import { UserSchema } from "../User";
 
 class Key extends TimeStamps {
-	@prop()
-	token: string;
+	@prop({ ref: "User" })
+	user: Ref<UserSchema>;
 
 	@prop({ default: true })
 	valid?: boolean;

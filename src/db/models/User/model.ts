@@ -1,4 +1,4 @@
-import { getModelForClass, prop } from "@typegoose/typegoose";
+import { getModelForClass, prop, Ref } from "@typegoose/typegoose";
 import { TimeStamps } from "@typegoose/typegoose/lib/defaultClasses";
 import { Field, ID, InterfaceType, ObjectType } from "type-graphql";
 import { SeedSchema } from "../Seed";
@@ -55,7 +55,7 @@ class User extends TimeStamps {
 
 	@Field(() => SeedSchema, { nullable: true })
 	@prop({ ref: "Seed", default: null })
-	seed?: SeedSchema;
+	seed?: Ref<SeedSchema>;
 }
 
 const Model = getModelForClass(User, { schemaOptions: { timestamps: true } });

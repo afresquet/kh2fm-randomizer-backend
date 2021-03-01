@@ -1,9 +1,5 @@
 import { User } from "./model";
 
-const find = (id: string) => {
+export const find = (id: string) => {
 	return User.findById(id).populate("seed");
-};
-
-export const UserService = {
-	find,
 };

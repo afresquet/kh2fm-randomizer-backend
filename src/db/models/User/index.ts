@@ -1,2 +1,2 @@
 export * from "./model";
-export * from "./service";
+export * as UserService from "./service";
