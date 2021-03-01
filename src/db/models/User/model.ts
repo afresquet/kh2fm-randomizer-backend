@@ -31,15 +31,15 @@ class DiscordProvider extends Provider {}
 
 @ObjectType()
 class Providers {
-	@Field(() => PatreonProvider)
+	@Field(() => PatreonProvider, { nullable: true })
 	@prop({ _id: false })
 	patreon?: PatreonProvider;
 
-	@Field(() => TwitchProvider)
+	@Field(() => TwitchProvider, { nullable: true })
 	@prop({ _id: false })
 	twitch?: TwitchProvider;
 
-	@Field(() => DiscordProvider)
+	@Field(() => DiscordProvider, { nullable: true })
 	@prop({ _id: false })
 	discord?: DiscordProvider;
 }

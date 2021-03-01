@@ -11,7 +11,7 @@ import { createApolloServer } from "./graphql";
 
 	const apolloServer = await createApolloServer();
 
-	apolloServer.applyMiddleware({ app });
+	apolloServer.applyMiddleware({ app, cors: false });
 
 	app.listen(port, () => {
 		console.log(`Server listening on port ${port}...`);
