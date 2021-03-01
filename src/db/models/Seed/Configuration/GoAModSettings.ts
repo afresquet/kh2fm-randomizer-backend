@@ -1,11 +1,12 @@
 import { prop } from "@typegoose/typegoose";
 import { Configuration } from "@valaxor/kh2fm-randomizer/dist/types";
 import { Toggle } from "@valaxor/kh2fm-randomizer/dist/types/enums";
-import { Field, ObjectType } from "type-graphql";
+import { Field, InputType, ObjectType } from "type-graphql";
 
 type T = Configuration["gameMode"]["goa"];
 
-@ObjectType()
+@InputType("GoAModSettingsInput")
+@ObjectType("GoAModSettingsType")
 export class GoAModSettings implements T {
 	@Field(() => Toggle)
 	@prop()

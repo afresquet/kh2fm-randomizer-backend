@@ -1,7 +1,7 @@
 import { prop } from "@typegoose/typegoose";
 import { Configuration as Config } from "@valaxor/kh2fm-randomizer/dist/types";
 import { GameMode as GameModeEnum } from "@valaxor/kh2fm-randomizer/dist/types/enums";
-import { Field, ObjectType } from "type-graphql";
+import { Field, InputType, ObjectType } from "type-graphql";
 import { Experimental } from "./Experimental";
 import { GoAModSettings } from "./GoAModSettings";
 import { Include } from "./Include";
@@ -10,8 +10,9 @@ import { Worlds } from "./Worlds";
 
 type GM = Config["gameMode"];
 
-@ObjectType()
-class GameModeSchema implements GM {
+@InputType("GameModeInput")
+@ObjectType("GameModeType")
+class GameMode implements GM {
 	@Field(() => GameModeEnum)
 	@prop()
 	mode: GameModeEnum;
@@ -21,7 +22,8 @@ class GameModeSchema implements GM {
 	goa: GoAModSettings;
 }
 
-@ObjectType()
+@InputType("ConfigurationInput")
+@ObjectType("ConfigurationType")
 export class Configuration implements Omit<Config, "name"> {
 	@Field(() => Settings)
 	@prop({ _id: false })
@@ -35,9 +37,9 @@ export class Configuration implements Omit<Config, "name"> {
 	@prop({ _id: false })
 	include: Include;
 
-	@Field(() => GameModeSchema)
+	@Field(() => GameMode)
 	@prop({ _id: false })
-	gameMode: GameModeSchema;
+	gameMode: GameMode;
 
 	@Field(() => Experimental)
 	@prop({ _id: false })

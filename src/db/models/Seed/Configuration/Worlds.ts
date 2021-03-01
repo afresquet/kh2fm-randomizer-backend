@@ -1,11 +1,12 @@
 import { prop } from "@typegoose/typegoose";
 import { Configuration } from "@valaxor/kh2fm-randomizer/dist/types";
 import { RandomizingAction } from "@valaxor/kh2fm-randomizer/dist/types/enums";
-import { Field, ObjectType } from "type-graphql";
+import { Field, InputType, ObjectType } from "type-graphql";
 
 type T = Configuration["worlds"];
 
-@ObjectType()
+@InputType("WorldsInput")
+@ObjectType("WorldsType")
 export class Worlds implements T {
 	@Field(() => RandomizingAction)
 	@prop()

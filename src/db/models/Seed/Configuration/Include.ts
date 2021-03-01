@@ -4,11 +4,12 @@ import {
 	RandomizingAction,
 	Toggle,
 } from "@valaxor/kh2fm-randomizer/dist/types/enums";
-import { Field, ObjectType } from "type-graphql";
+import { Field, InputType, ObjectType } from "type-graphql";
 
 type T = Configuration["include"];
 
-@ObjectType()
+@InputType("IncludeInput")
+@ObjectType("IncludeType")
 export class Include implements T {
 	@Field(() => RandomizingAction)
 	@prop()

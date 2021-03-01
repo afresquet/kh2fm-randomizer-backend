@@ -7,11 +7,12 @@ import {
 	RandomizingAction,
 	Toggle,
 } from "@valaxor/kh2fm-randomizer/dist/types/enums";
-import { Field, ObjectType } from "type-graphql";
+import { Field, InputType, ObjectType } from "type-graphql";
 
 type T = Configuration["settings"];
 
-@ObjectType()
+@InputType("SettingsInput")
+@ObjectType("SettingsType")
 export class Settings implements T {
 	@Field(() => GameMode)
 	@prop()
