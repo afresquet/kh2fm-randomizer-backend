@@ -1,5 +1,6 @@
 declare namespace NodeJS {
 	export interface ProcessEnv {
+		PORT: string;
 		MONGO_DB_URL: string;
 		CORS_CLIENT_ORIGIN: string;
 		COOKIE_SESSION_KEY: string;

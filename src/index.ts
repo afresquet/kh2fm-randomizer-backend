@@ -7,7 +7,7 @@ import { createApolloServer } from "./graphql";
 (async () => {
 	await connectDB();
 
-	const port = process.env.PORT || 5000;
+	const port = process.env.PORT;
 
 	const apolloServer = await createApolloServer();
 

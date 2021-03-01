@@ -5,7 +5,7 @@ import { GraphQLContext } from "../../../types/GraphQLContext";
 @Resolver()
 export class UserQueryResolver {
 	@Query(() => UserSchema, { nullable: true })
-	user(@Ctx() context: GraphQLContext) {
-		return context.req.user ?? null;
+	user(@Ctx() { user }: GraphQLContext) {
+		return user ?? null;
 	}
 }
